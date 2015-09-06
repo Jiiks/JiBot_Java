@@ -1,3 +1,7 @@
+/*
+ * 
+ */
+
 package net.jiiks.jibot.ui;
 
 import javax.swing.JFrame;

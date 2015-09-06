@@ -1,3 +1,7 @@
+/*
+ * 
+ */
+
 package net.jiiks.jibot;
 
 import java.awt.EventQueue;
