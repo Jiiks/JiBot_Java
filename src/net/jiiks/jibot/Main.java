@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import net.jiiks.jibot.bot.BotMain;
 import net.jiiks.jibot.ui.UiMain;
 
 import org.pushingpixels.substance.api.skin.SubstanceGraphiteGlassLookAndFeel;
@@ -16,14 +17,15 @@ import org.pushingpixels.substance.api.skin.SubstanceGraphiteGlassLookAndFeel;
 public class Main {
 
 	public static void main(String[] args) {
-		
 		new Main();
-		
 	}
 	
 	public Main() {
-		
-		
+
+		if(!Config.init()) {
+			System.out.println("Failed to initialize");
+			return;
+		}
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,13 +38,10 @@ public class Main {
 				}
 				
 				UiMain _ui = new UiMain();
-			
 			}
 		});
-		
-		
-
-		
+		BotMain bot = BotMain.getBot();
+		bot.setVerbose(true);
+		bot.doConnect("irc.twitch.tv", "jibotv2", 6667, "oauth:4rm6ej2sefvvlniebwtjpfbfok0qci", new String[]{"jibotv2"});
 	}
-	
 }
