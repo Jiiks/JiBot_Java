@@ -10,6 +10,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import net.jiiks.jibot.bot.BotMain;
+import net.jiiks.jibot.managers.CommandManager;
+import net.jiiks.jibot.stock.CommandWr;
 import net.jiiks.jibot.ui.UiMain;
 
 import org.pushingpixels.substance.api.skin.SubstanceGraphiteGlassLookAndFeel;
@@ -40,8 +42,9 @@ public class Main {
 				UiMain _ui = new UiMain();
 			}
 		});
+		
 		BotMain bot = BotMain.getBot();
 		bot.setVerbose(true);
-		bot.doConnect("irc.twitch.tv", "jibotv2", 6667, "oauth:4rm6ej2sefvvlniebwtjpfbfok0qci", new String[]{"jibotv2"});
+		bot.doConnect();
 	}
 }
