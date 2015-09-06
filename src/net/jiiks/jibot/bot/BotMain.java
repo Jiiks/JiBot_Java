@@ -7,6 +7,7 @@ package net.jiiks.jibot.bot;
 import java.io.IOException;
 
 import net.jiiks.jibot.Config;
+import net.jiiks.jibot.managers.CommandManager;
 
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
@@ -70,12 +71,17 @@ public class BotMain extends PircBot{
 		joinChannel(channel.startsWith("#") ? channel : "#" + channel);
 	}
 	
+	public void doSend(String channel, String message) {
+		sendMessage(channel.startsWith("#") ? channel : "#" + channel, message);
+	}
+	
 	/*
 	 * On Connect event
 	 * Request membership, commands and tags
 	 * @see org.jibble.pircbot.PircBot#onConnect()
 	 */
 	public void onConnect() {
+		
 		sendRawLine("CAP REQ :twitch.tv/membership");
 		sendRawLine("CAP REQ :twitch.tv/commands");
 		sendRawLine("CAP REQ :twitch.tv/tags");
@@ -89,10 +95,14 @@ public class BotMain extends PircBot{
 		System.out.println(line);
 		if(line.contains("PRIVMSG")){ 
 			Message m = new Message(line);
+			String action = CommandManager.getCommandManager().getAction(m);
+			
+			if(action != null) {
+				doSend(m.channel, action);
+			}
+			
 		}
 		
 		
 	}
-	
-	
 }
